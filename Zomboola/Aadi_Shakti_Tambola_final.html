@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+ <html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <script type="text/javascript">
+		
+    function codeAddress() 
+	{
+		var all_row = new Array(15);
+		
+		var loop_again = 1;
+		
+		while(loop_again === 1)
+		{
+		
+			
+			//Row 1
+			var row1 = [];
+			while(row1.length < 5)
+			{
+				var r = Math.floor(Math.random() * 10) + 1;
+				if(row1.indexOf(r) === -1) row1.push(r);
+			}	
+			all_row = row1.slice();
+		
+			//Row 2
+			var row2 = [];
+			while(row2.length < 5)
+			{
+				var r = Math.floor(Math.random() * 10) + 1;
+				if(row2.indexOf(r) === -1) row2.push(r);
+			}
+			all_row.push.apply(all_row, row2);
+		
+			//Row 3
+			var row3 = [];
+			while(row3.length < 5)
+			{
+				var r = Math.floor(Math.random() * 10) + 1;
+				if(row3.indexOf(r) === -1) row3.push(r);
+			}
+		
+			all_row.push.apply(all_row, row3);
+			loop_again = 0;			
+		    
+
+			for(var icheck = 1; icheck < 10; icheck++)
+			{
+				found_it = 0;
+				for(var j=0; j<all_row.length; j++)
+				{
+					
+					if(all_row[j] === icheck) found_it = 1;
+						
+				}	
+					if(found_it === 0) 
+					{
+						loop_again = 1;
+						break;
+					}
+				
+			}	
+		}
+        // Create one dimensional array 
+		var arr_final = new Array(3); 
+  		// Loop to create 2D array using 1D array		 
+		for (var i = 0; i < arr_final.length; i++) 
+		{ 
+			arr_final[i] = []; 
+			for (var j=0; j<10; j++)
+			{
+				arr_final[i][j] = 0;
+			}
+		} 
+
+		for(i=0; i<row1.length; i++)
+		{
+			if(row1[i]== 1)
+			{
+				var alert1 = Math.floor(Math.random() * 9 ) + (row1[i] * 1);				
+				var col = row1[i]-1;
+				arr_final[0][col] = alert1; 
+			}
+			else 
+			{
+				var alert2 =  Math.floor( Math.random() * 9 ) + (( row1[i]-1 ) *10  );
+				var col = row1[i]-1;
+				arr_final[0][col] = alert2;
+			}
+		}
+		
+	
+		for(i=0; i<row2.length; i++)
+		{
+			if(row2[i]== 1)
+			{
+				var alert3 = Math.floor(Math.random() * 9 ) + (row2[i] * 1);
+				var col = row2[i]-1;
+				//Duplicate check		
+				while(arr_final[0].indexOf(alert3) !== -1) 
+				{
+					alert3 = Math.floor(Math.random() * 9 ) + (row2[i] * 1);
+				}
+				arr_final[1][col] = alert3;
+			}
+			else 
+			{
+				var alert4 =  Math.floor( Math.random() * 9 ) + (( row2[i]-1 ) *10  );
+				var col = row2[i]-1;
+				while(arr_final[0].indexOf(alert4) !== -1) 
+				{
+					alert4 = Math.floor(Math.random() * 9) + (( row2[i]-1 ) *10  );
+				}
+				arr_final[1][col] = alert4;
+			}
+		}
+		
+		for(i=0; i<row3.length; i++)
+		{
+			if(row3[i]== 1)
+			{
+				var alert3 = Math.floor(Math.random() * 9 ) + (row3[i] * 1);
+				var col = row3[i]-1;
+				while ( (arr_final[0].indexOf(alert3) !== -1) || (arr_final[1].indexOf(alert3) !== -1) )
+				{
+					alert3 = Math.floor(Math.random() * 9 ) + (row3[i] * 1);
+				}
+				arr_final[2][col] = alert3;
+			}
+			else 
+			{
+				var alert4 =  Math.floor( Math.random() * 9 ) + (( row3[i]-1 ) *10  );
+				var col = row3[i]-1;
+				while ( (arr_final[0].indexOf(alert4) !== -1) || (arr_final[1].indexOf(alert4) !== -1) )
+				{
+					alert4 = Math.floor(Math.random() * 9) + (( row3[i]-1 ) *10  );
+				}
+				arr_final[2][col] = alert4;
+			}
+		}
+
+		
+		for(var i=0; i<10; i++)
+		{
+			if(arr_final[0][i]>0 && arr_final[1][i] >0)
+			{
+				if(arr_final[0][i] > arr_final[1][i])
+				{
+					arr_final[0][i] = [arr_final[1][i], arr_final[1][i] = arr_final[0][i]][0];
+				}				
+			}
+			if(arr_final[0][i]>0 && arr_final[2][i] >0)
+			{
+				if(arr_final[0][i] > arr_final[2][i])
+				{
+					arr_final[0][i] = [arr_final[2][i], arr_final[2][i] = arr_final[0][i]][0];
+				}				
+			}
+			if(arr_final[1][i]>0 && arr_final[2][i] >0)
+			{
+				if(arr_final[1][i] > arr_final[2][i])
+				{
+					arr_final[1][i] = [arr_final[2][i], arr_final[2][i] = arr_final[1][i]][0];
+				}				
+			}
+		}
+
+		var table = document.createElement('table');
+		table.setAttribute("class", "tg");
+		for (var i = 0; i < 3; i++)
+		{
+			var tr = document.createElement('tr');   
+			tr.setAttribute("class", "td");
+			for(var j = 0; j < 9; j++)
+			{
+				var td1 = document.createElement('td');
+				var text1;
+				if(arr_final[i][j] == 0)
+				{
+					text1 = document.createTextNode("");						
+				}
+				else
+				{
+					text1 = document.createTextNode(arr_final[i][j]); 
+				}
+				td1.appendChild(text1);
+				tr.appendChild(td1);
+			}
+	
+			table.appendChild(tr);
+		}
+        
+		document.body.appendChild(table); 
+	}
+		
+	function generateTicket()
+	{	
+        var tktcount = document.getElementById("tktnumber").value;
+		var tktnam = document.getElementById("tkname").value;
+	    var tkttxt = "Thank you " + tktnam + ".";
+        if(tktcount == 1)
+		{
+			tkttxt = tkttxt + " Please find your ticket below";
+		}
+		
+		if(tktcount > 1)
+		{
+			tkttxt = tkttxt + " Please find your " + tktcount + " tickets below.";
+		}
+
+		var para_begin = document.createElement("P");
+		para_begin.innerText = tkttxt;
+		para_begin.setAttribute( "class", "tp" );
+		document.body.appendChild(para_begin);
+		
+		for(var i = 0; i<tktcount; i++)
+		{
+			var t_num = document.createElement("em");
+			t_num.innerText = "Ticket No : " + ( i+1 );
+			t_num.setAttribute( "class", "tp" );
+			document.body.appendChild(t_num);
+
+			codeAddress();
+		}
+		
+		//Hiding the labels and buttons before printing
+		var x = document.getElementById("myChoice");
+		x.style.display = "none";
+		
+		var para_end = document.createElement("P");
+		para_end.innerText	= "Thanks for participating in Aadi Shakti Zoombola 2020 and supporting a good cause";
+		para_end.setAttribute( "class", "tp" );
+		document.body.appendChild(para_end);
+	}
+    </script>    
+ </head>
+ <style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0 15x;table-layout:fixed; border:inset 5px blue; background-color:#F6F6F6; background-image: url("logo.gif");background-repeat: no-repeat;background-position: center; page-break-inside: avoid;}
+.tg td{border-collapse:separate;font-family:Arial, sans-serif;font-size:20px;padding:10px 5px;border-style:solid;border-width:2px;overflow:hidden;word-break:normal;border-color:black;width:22px}
+.tg th{font-family:Arial, sans-serif;font-size:20px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:2px;overflow:hidden;word-break:normal;border-color:black;}
+.tg .tg-0lax{text-align:left;vertical-align:top;width:100px}
+.tp {font-family: Gabriola, Charcoal, sans-serif;font-size:20px;font-weight:normal;word-break:normal;}
+.no-print {display: none !important; }
+</style>
+<body>
+ <div id="myChoice">
+	<label id="fname" >Name:</label>
+	<input type="text" id="tkname" name="ticketnn" ><br><br>
+	<label id="fname" >Number of tickets:</label>
+	<input type="text" id="tktnumber" name="ticketnumber" ><br><br>
+  
+	<button onclick="generateTicket()">Generate Tickets</button>
+	<br><br>
+ </div>
+</body>
+</html>
