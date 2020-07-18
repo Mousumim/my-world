@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  rspamd-service:
+    build:
+      context: ../dockerfiles/rspamd-service
+      dockerfile: Dockerfile
+    ports:
+    - 11333:11333
+    - 11332:11332
+    - 11334:11334
+#  integration:
+#    build:
+#      context: ../dockerfiles/integration
+#      dockerfile: Dockerfile
+#    volumes:
+#    - ../integration-tests:/integration-tests
+    #network_mode: "service:rspamd-service"

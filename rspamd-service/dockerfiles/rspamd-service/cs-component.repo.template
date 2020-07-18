@@ -1,0 +1,8 @@
+[cs-component-rhel7-dev-yum]
+name = Clearswift component packages
+baseurl = http://devnexus.engineering.clearswift.org:8081/repository/clearswift-%REPOSITORY_TYPE%-yum
+enabled = 1
+gpgkey =
+gpgcheck = 0
+metadata_expire = 600
+skip_if_unavailable = 1
